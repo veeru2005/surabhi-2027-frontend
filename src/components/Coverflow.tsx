@@ -16,7 +16,7 @@ export default function Coverflow() {
 
   useEffect(() => {
     if (paused || open >= 0) return;
-    const id = setInterval(() => go(idx + 1), 3800);
+    const id = setInterval(() => go(idx + 1), 2800);
     return () => clearInterval(id);
   }, [idx, paused, open, go]);
 
@@ -30,13 +30,16 @@ export default function Coverflow() {
   return (
     <div
       className="coverflow"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onPointerDown={(e) => (startX.current = e.clientX)}
+      onPointerDown={(e) => {
+        startX.current = e.clientX;
+        setPaused(true);
+      }}
+      onPointerLeave={() => setPaused(false)}
       onPointerUp={(e) => {
         if (startX.current === null) return;
         const dx = e.clientX - startX.current;
         startX.current = null;
+        setPaused(false);
         if (Math.abs(dx) > 40) go(idx + (dx < 0 ? 1 : -1));
       }}
       onKeyDown={(e) => {

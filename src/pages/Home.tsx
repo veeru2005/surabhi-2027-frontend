@@ -26,7 +26,7 @@ export default function Home() {
         <Petals />
         <div className="container hero__grid">
           <div className="hero__copy">
-            <p className="hero__kicker anim-rise">KL University · KL SAC</p>
+            <p className="hero__kicker hero__kicker--top anim-rise">KL University · KL SAC</p>
             <div className="hero__lockup">
               <h1 className="hero__title anim-rise anim-d1">
                 <span className="hero__title-main">
@@ -58,6 +58,8 @@ export default function Home() {
                 See the programme
               </Link>
             </div>
+            {/* phones show the kicker under the buttons instead of over the logo */}
+            <p className="hero__kicker hero__kicker--foot anim-rise anim-d4">KL University · KL SAC</p>
           </div>
 
           <div className="hero__window anim-window">

@@ -1643,13 +1643,16 @@ p {
   .nav__link {
     padding: 0.95rem 0.2rem;
     font-size: 0.78rem;
+    text-align: center;
+    justify-content: center;
     border-bottom: 1px solid rgba(227, 200, 138, 0.1);
   }
   .nav__link::after {
     display: none;
   }
   .nav__links .btn {
-    margin: 1rem 0 0;
+    margin: 1rem auto 0;
+    align-self: center;
   }
   .hero {
     padding-top: calc(var(--nav-h) + 40px);
@@ -1948,20 +1951,48 @@ p {
   margin-top: clamp(2rem, 4vw, 3rem);
 }
 
+/* ---------- Hero kicker placement ---------- */
+.hero__kicker--foot {
+  display: none;
+}
+@media (max-width: 900px) {
+  .hero__kicker--top {
+    display: none;
+  }
+  .hero .hero__kicker--foot {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.6rem;
+    font-size: 0.66rem;
+  }
+  .hero .hero__kicker--foot::before {
+    display: block;
+    width: 36px;
+    height: 1.5px;
+  }
+  .hero .hero__kicker--foot::before,
+  .hero .hero__kicker--foot::after {
+    content: '';
+    width: 36px;
+    height: 1.5px;
+    background: var(--marigold);
+  }
+}
+
 /* ---------- Gallery: 3D coverflow ---------- */
 .section--gallery {
   overflow: hidden;
 }
 .coverflow {
   position: relative;
-  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  margin-top: clamp(0.5rem, 1.5vw, 1rem);
   outline: none;
   touch-action: pan-y;
   user-select: none;
 }
 .coverflow__stage {
   position: relative;
-  height: clamp(300px, 42vw, 520px);
+  height: clamp(280px, 34vw, 460px);
   perspective: 1400px;
   transform-style: preserve-3d;
 }
