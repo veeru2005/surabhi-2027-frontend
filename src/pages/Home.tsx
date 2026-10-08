@@ -25,7 +25,7 @@ export default function Home() {
         <Petals />
         <div className="container hero__grid">
           <div className="hero__copy">
-            <p className="hero__kicker anim-rise">KL University · Student Activity Centre</p>
+            <p className="hero__kicker anim-rise">KL University · KL SAC</p>
             <div className="hero__lockup">
               <h1 className="hero__title anim-rise anim-d1">
                 <span className="hero__title-main" ref={titleRef}>

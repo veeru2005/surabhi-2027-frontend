@@ -12,8 +12,15 @@ export function useFitText() {
     const fit = () => {
       s.style.letterSpacing = '0px';
       s.style.marginRight = '0px';
+      s.style.fontSize = '';
       const chars = (s.textContent ?? '').trim().length;
-      const free = t.getBoundingClientRect().width - s.scrollWidth;
+      const titleW = t.getBoundingClientRect().width;
+      if (s.scrollWidth > titleW) {
+        // too wide even with no spacing: shrink the text to fit
+        const fs = parseFloat(getComputedStyle(s).fontSize);
+        s.style.fontSize = `${(fs * titleW) / s.scrollWidth}px`;
+      }
+      const free = titleW - s.scrollWidth;
       const ls = Math.max(0, free / Math.max(1, chars - 1));
       s.style.letterSpacing = `${ls}px`;
       s.style.marginRight = `${-ls}px`; // the last letter's trailing space

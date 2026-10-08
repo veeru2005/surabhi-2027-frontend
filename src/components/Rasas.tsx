@@ -3,9 +3,10 @@ import { RASAS } from '../data/content';
 
 /** Rounded panels, one per KL SAC creative club. Hover (desktop) or tap opens one. */
 export default function Rasas() {
-  const [active, setActive] = useState(0);
+  // all closed until the cursor (or a tap) opens one
+  const [active, setActive] = useState(-1);
   return (
-    <div className="rasas" role="list">
+    <div className="rasas" role="list" onMouseLeave={() => setActive(-1)}>
       {RASAS.map((r, i) => (
         <button
           type="button"
@@ -15,7 +16,7 @@ export default function Rasas() {
           style={{ ['--c' as string]: r.color }}
           onMouseEnter={() => setActive(i)}
           onFocus={() => setActive(i)}
-          onClick={() => setActive(i)}
+          onClick={() => setActive((a) => (a === i && !window.matchMedia('(hover: hover)').matches ? -1 : i))}
           aria-expanded={active === i}
         >
           <span className="rasa__icon" aria-hidden="true">
