@@ -50,6 +50,8 @@ export class IntroScene {
   private baseZ = 11;
   private ringScale = 1;
   private ringStretch = 1;
+  private mandalaBase = 1;
+  private mandalaY = EMBLEM_Y;
   private tiles: THREE.Mesh[] = [];
   private emblem = new THREE.Group();
   private left!: THREE.Mesh;
@@ -196,7 +198,7 @@ export class IntroScene {
       this.track(new THREE.PlaneGeometry(6.4, 6.4)),
       this.track(new THREE.MeshBasicMaterial({ map: mTex, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending })),
     );
-    this.mandala.position.set(0, EMBLEM_Y, -1.2);
+    this.mandala.position.set(0, this.mandalaY, -1.2);
     this.scene.add(this.mandala);
 
     const ratio = 595 / 173;
@@ -248,6 +250,10 @@ export class IntroScene {
     this.ringScale = Math.min(1, visibleWidth / 10);
     // phones in portrait: stretch the tile ring into a tall oval so the centre stays clear for the word
     this.ringStretch = aspect < 0.8 ? Math.min(2.1, 0.78 / aspect) : 1;
+    // desktop/landscape: drop the halo a little so it clears the 'KL University presents' line (phones unchanged)
+    this.mandalaBase = aspect < 0.8 ? 1 : 0.9;
+    this.mandalaY = aspect < 0.8 ? EMBLEM_Y : EMBLEM_Y - 0.45;
+    if (this.mandala) this.mandala.position.y = this.mandalaY;
     this.camera.updateProjectionMatrix();
   }
 
@@ -340,7 +346,7 @@ export class IntroScene {
       const halo = clamp01((t - (T.lock - 0.2)) / 0.9);
       (this.mandala.material as THREE.MeshBasicMaterial).opacity = halo * 0.32 * (1 - exit);
       this.mandala.rotation.z = t * 0.1;
-      this.mandala.scale.setScalar(0.75 + easeOutBack(halo) * 0.25);
+      this.mandala.scale.setScalar((0.75 + easeOutBack(halo) * 0.25) * this.mandalaBase);
 
       const w = easeOutCubic(clamp01((t - T.word) / 0.9));
       (this.wordmark.material as THREE.MeshBasicMaterial).opacity = w * (1 - exit);
