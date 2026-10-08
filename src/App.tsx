@@ -8,6 +8,7 @@ import About from './pages/About';
 import Events from './pages/Events';
 import Schedule from './pages/Schedule';
 import Contact from './pages/Contact';
+import Gallery from './pages/Gallery';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -31,6 +32,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/events" element={<Events />} />
           <Route path="/schedule" element={<Schedule />} />
+          <Route path="/gallery" element={<Gallery />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

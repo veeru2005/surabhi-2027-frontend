@@ -8,10 +8,14 @@ import Rasas from '../components/Rasas';
 import EventGrid from '../components/EventGrid';
 import DayTabs from '../components/DayTabs';
 import Ornament from '../components/Ornament';
+import FilmStrip from '../components/FilmStrip';
+import Mosaic from '../components/Mosaic';
+import { useFitText } from '../hooks/useFitText';
 import { useParallax } from '../hooks/useParallax';
 
 export default function Home() {
   const mandala = useParallax<HTMLDivElement>(0.25);
+  const { titleRef, subRef } = useFitText();
 
   return (
     <>
@@ -22,10 +26,16 @@ export default function Home() {
         <div className="container hero__grid">
           <div className="hero__copy">
             <p className="hero__kicker anim-rise">KL University · Student Activity Centre</p>
-            <h1 className="hero__title anim-rise anim-d1">
-              <span className="hero__title-main">Surabhi</span>
-            </h1>
-            <p className="hero__sub anim-rise anim-d2">International Cultural Fest <span className="hero__yr">2027</span></p>
+            <div className="hero__lockup">
+              <h1 className="hero__title anim-rise anim-d1">
+                <span className="hero__title-main" ref={titleRef}>
+                  Surabhi
+                </span>
+              </h1>
+              <p className="hero__sub anim-rise anim-d2" ref={subRef}>
+                International Cultural Fest <span className="hero__yr">2027</span>
+              </p>
+            </div>
             <p className="hero__date anim-rise anim-d2">
               <span>12 – 13 March 2027</span>
               <span className="dot">✦</span>
@@ -109,6 +119,27 @@ export default function Home() {
           </Reveal>
           <Reveal>
             <EventGrid />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 4b. GALLERY — last year in frames */}
+      <section className="section section--emerald section--gallery">
+        <div className="container">
+          <Reveal className="heading heading--split">
+            <div>
+              <p className="eyebrow">Surabhi 2026</p>
+              <h2 className="section-title">Last year, in frames</h2>
+            </div>
+            <Link to="/gallery" className="btn btn--line">
+              Open the gallery
+            </Link>
+          </Reveal>
+        </div>
+        <FilmStrip />
+        <div className="container gallery-teaser">
+          <Reveal>
+            <Mosaic limit={5} />
           </Reveal>
         </div>
       </section>

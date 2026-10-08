@@ -63,6 +63,7 @@ export const NAV_LINKS = [
   { to: '/about', label: 'About' },
   { to: '/events', label: 'Events' },
   { to: '/schedule', label: 'Schedule' },
+  { to: '/gallery', label: 'Gallery' },
   { to: '/contact', label: 'Contact' },
 ];
 
