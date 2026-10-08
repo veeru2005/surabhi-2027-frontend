@@ -8,14 +8,15 @@ import Rasas from '../components/Rasas';
 import EventGrid from '../components/EventGrid';
 import DayTabs from '../components/DayTabs';
 import Ornament from '../components/Ornament';
-import FilmStrip from '../components/FilmStrip';
-import Mosaic from '../components/Mosaic';
-import { useFitText } from '../hooks/useFitText';
+import Coverflow from '../components/Coverflow';
 import { useParallax } from '../hooks/useParallax';
+
+const SUB_TEXT = 'International Cultural Fest 2027';
+const SUB_LETTERS = SUB_TEXT.split('');
+const SUB_YEAR_AT = SUB_TEXT.indexOf('2027');
 
 export default function Home() {
   const mandala = useParallax<HTMLDivElement>(0.25);
-  const { titleRef, subRef } = useFitText();
 
   return (
     <>
@@ -28,12 +29,17 @@ export default function Home() {
             <p className="hero__kicker anim-rise">KL University · KL SAC</p>
             <div className="hero__lockup">
               <h1 className="hero__title anim-rise anim-d1">
-                <span className="hero__title-main" ref={titleRef}>
+                <span className="hero__title-main">
                   Surabhi
                 </span>
               </h1>
-              <p className="hero__sub anim-rise anim-d2" ref={subRef}>
-                International Cultural Fest <span className="hero__yr">2027</span>
+              {/* each letter is a flex item, spread edge to edge under the title */}
+              <p className="hero__sub anim-rise anim-d2" aria-label="International Cultural Fest 2027">
+                {SUB_LETTERS.map((ch, i) => (
+                  <span key={i} aria-hidden="true" className={ch === ' ' ? 'sp' : i >= SUB_YEAR_AT ? 'hero__yr' : undefined}>
+                    {ch === ' ' ? '\u00a0' : ch}
+                  </span>
+                ))}
               </p>
             </div>
             <p className="hero__date anim-rise anim-d2">
@@ -136,12 +142,9 @@ export default function Home() {
             </Link>
           </Reveal>
         </div>
-        <FilmStrip />
-        <div className="container gallery-teaser">
-          <Reveal>
-            <Mosaic limit={5} />
-          </Reveal>
-        </div>
+        <Reveal dir="zoom">
+          <Coverflow />
+        </Reveal>
       </section>
 
       {/* 5. TWO DAYS — ivory */}

@@ -146,3 +146,12 @@
   -webkit-tap-highlight-color: transparent;
   user-select: none;
 }
+
+/* phones in portrait: smaller word, sitting in the clear centre of the tile oval */
+@media (max-aspect-ratio: 4/5) {
+  .intro3d__word {
+    top: 50%;
+    font-size: clamp(1.2rem, 5.6vw, 2rem);
+    letter-spacing: 0.2em;
+  }
+}

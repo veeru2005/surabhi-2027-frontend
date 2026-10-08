@@ -49,6 +49,7 @@ export class IntroScene {
   private camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
   private baseZ = 11;
   private ringScale = 1;
+  private ringStretch = 1;
   private tiles: THREE.Mesh[] = [];
   private emblem = new THREE.Group();
   private left!: THREE.Mesh;
@@ -136,7 +137,7 @@ export class IntroScene {
           roughness: 0.3,
           metalness: 0.1,
           clearcoat: 1,
-          clearcoatRoughness: 0.06,
+          clearcoatRoughness: 0.3,
         }),
       );
       // BoxGeometry groups: +x, -x, +y, -y, +z (front), -z (back)
@@ -245,6 +246,8 @@ export class IntroScene {
     this.baseZ = Math.max(11, 4.4 / (visH * aspect), 5.6 / visH);
     const visibleWidth = visH * this.baseZ * aspect;
     this.ringScale = Math.min(1, visibleWidth / 10);
+    // phones in portrait: stretch the tile ring into a tall oval so the centre stays clear for the word
+    this.ringStretch = aspect < 0.8 ? Math.min(2.1, 0.78 / aspect) : 1;
     this.camera.updateProjectionMatrix();
   }
 
@@ -281,7 +284,7 @@ export class IntroScene {
       const a = (i / n) * Math.PI * 2 + t * 0.28 + conv * 4;
       const r = R * (1 - conv);
       const ringX = Math.cos(a) * r * 1.15;
-      const ringY = Math.sin(a) * r * 0.78 + EMBLEM_Y * conv + Math.sin(t * 1.4 + i) * 0.12 * (1 - conv);
+      const ringY = Math.sin(a) * r * 0.78 * this.ringStretch + EMBLEM_Y * conv + Math.sin(t * 1.4 + i) * 0.12 * (1 - conv);
       const ringZ = Math.sin(a * 2) * 0.7 * (1 - conv);
       m.position.set(THREE.MathUtils.lerp(ringX * 3, ringX, e), THREE.MathUtils.lerp(ringY * 3, ringY, e), THREE.MathUtils.lerp(-20, ringZ, e));
       m.rotation.set(Math.sin(t * 0.8 + i) * 0.35, Math.cos(t * 0.7 + i) * 0.5 + (1 - e) * 3, Math.sin(t * 0.5 + i) * 0.15 + conv * 3);
