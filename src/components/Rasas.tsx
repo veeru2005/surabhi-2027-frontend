@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { RASAS } from '../data/content';
 
-/** Five arched panels, one per art form. Hover (desktop) or tap opens one. */
+/** Rounded panels, one per KL SAC creative club. Hover (desktop) or tap opens one. */
 export default function Rasas() {
   const [active, setActive] = useState(0);
   return (

@@ -142,6 +142,37 @@ const ICONS: Record<string, IconDraw> = {
     }
     c.globalCompositeOperation = 'source-over';
   },
+  gamepad: (c) => {
+    // controller body with two grips
+    c.beginPath();
+    c.moveTo(28, 32);
+    c.lineTo(72, 32);
+    c.bezierCurveTo(88, 32, 94, 50, 92, 66);
+    c.bezierCurveTo(90, 80, 78, 82, 70, 72);
+    c.lineTo(64, 64);
+    c.lineTo(36, 64);
+    c.lineTo(30, 72);
+    c.bezierCurveTo(22, 82, 10, 80, 8, 66);
+    c.bezierCurveTo(6, 50, 12, 32, 28, 32);
+    c.closePath();
+    c.fill();
+    c.globalCompositeOperation = 'destination-out';
+    // d-pad
+    c.fillRect(22, 45, 16, 5);
+    c.fillRect(27.5, 39.5, 5, 16);
+    // buttons
+    [
+      [70, 42],
+      [78, 49],
+      [62, 49],
+      [70, 56],
+    ].forEach(([x, y]) => {
+      c.beginPath();
+      c.arc(x, y, 3.6, 0, Math.PI * 2);
+      c.fill();
+    });
+    c.globalCompositeOperation = 'source-over';
+  },
   lotus: (c) => {
     const petal = (rot: number, len: number, w: number) => {
       c.save();
@@ -163,7 +194,7 @@ const ICONS: Record<string, IconDraw> = {
   },
 };
 
-export const ICON_NAMES = Object.keys(ICONS);
+export const ICON_NAMES = ['music', 'gamepad', ...Object.keys(ICONS).filter((k) => k !== 'music' && k !== 'gamepad')];
 
 /** Emerald tile face with a gold double border and a gold icon. */
 export function makeTileCanvas(name: string, size = 512) {

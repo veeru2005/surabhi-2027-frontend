@@ -19,7 +19,7 @@ export const EVENTS: FestEvent[] = [
   { icon: '📜', name: 'Sahitya', group: 'Creative', category: 'Literature', blurb: 'Elocution with rebuttal and short story writing.' },
   { icon: '🎬', name: 'Cine Carnival', group: 'Creative', category: 'Short Film & Photography', blurb: 'Tell your story through the lens.' },
   { icon: '🎭', name: 'Dramatics', group: 'Performing', category: 'Theatre', blurb: 'Stage plays, skits and mime.' },
-  { icon: '🎮', name: 'Kurukshetra', group: 'Competitive', category: 'eSports', blurb: 'Battle it out on the digital battlefield.' },
+  { icon: '🎮', name: 'Kurukshetra', group: 'Competitive', category: 'Gaming & eSports', blurb: 'Battle it out on the digital battlefield.' },
   { icon: '🏛️', name: 'Mock Parliament', group: 'Competitive', category: 'National Mock Parliament', blurb: 'Debate policy on a real parliament floor.' },
 ];
 
@@ -77,10 +77,16 @@ export const CONTACT = {
 export const EVENT_GROUPS = ['All', 'Performing', 'Creative', 'Competitive'] as const;
 
 /** The five "rasas" (art forms) shown as arched panels on the home page. */
+/* The ten Liberal Arts, Creative Arts & Hobby clubs of KL SAC (sac.kluniversity.in/clubs) */
 export const RASAS = [
-  { name: 'Music', native: 'Sangeet', icon: '🎶', color: '#e98a2b', text: 'Ragas, rock and everything between: classical, light and western, vocal and instrumental.' },
-  { name: 'Dance', native: 'Nritya', icon: '💃', color: '#d6336c', text: 'Bharatanatyam to hip-hop. Solo, duet and group stages for every style.' },
-  { name: 'Art', native: 'Kala', icon: '🎨', color: '#1c7ed6', text: 'Canvas, colour and craft. Paint India’s future live on campus.' },
-  { name: 'Drama', native: 'Natya', icon: '🎭', color: '#c92a2a', text: 'Stage plays, street plays, skits and mime that move a crowd.' },
-  { name: 'Fashion', native: 'Vastra', icon: '👗', color: '#7048e8', text: 'Themed runways where heritage weaves meet bold new silhouettes.' },
+  { name: 'Music', native: 'Music Club', icon: '🎶', color: '#e98a2b', text: 'Ragas, rock and everything between: classical, light and western, vocal and instrumental.' },
+  { name: 'Dance', native: 'Dance Club', icon: '💃', color: '#d6336c', text: 'Bharatanatyam to hip-hop. Solo, duet and group stages for every style.' },
+  { name: 'Gaming', native: 'KL eSports Club', icon: '🎮', color: '#2f9e44', text: 'Squad up for eSports battles on the big screen, from tactical shooters to battle royale.' },
+  { name: 'Art', native: 'Arts & Painting Club', icon: '🎨', color: '#1c7ed6', text: 'Canvas, colour and craft. Paint India’s future live on campus.' },
+  { name: 'Fashion', native: 'Vastraa Club', icon: '👗', color: '#7048e8', text: 'Themed runways where heritage weaves meet bold new silhouettes.' },
+  { name: 'Film', native: 'Short Film Makers Club', icon: '🎬', color: '#c92a2a', text: 'Write, shoot and cut a short film that holds a full auditorium.' },
+  { name: 'Photography', native: 'Photography Club', icon: '📷', color: '#0c8599', text: 'Frame the fest: portraits, street and stories told in a single shot.' },
+  { name: 'Literature', native: 'Literature Club', icon: '📜', color: '#a5652b', text: 'Elocution, debate and short stories for those who live by the word.' },
+  { name: 'Handicrafts', native: 'Handicrafts Club', icon: '🧵', color: '#d9480f', text: 'Clay, thread and paper turned into heritage you can hold.' },
+  { name: 'Adventure', native: 'Adventure Club', icon: '🧗', color: '#5c940d', text: 'Treks, climbs and challenges that take the fest outdoors.' },
 ];

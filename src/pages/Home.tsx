@@ -45,6 +45,7 @@ export default function Home() {
           </div>
 
           <div className="hero__window anim-window">
+            <img className="hero__mandala-full" src="/surabhi-mandala.png" alt="" aria-hidden="true" />
             <div className="jharokha">
               <div className="jharokha__halo" aria-hidden="true" />
               <img src="/surabhi-logo-2027.jpg" alt="Surabhi 2027 – International Cultural Fest logo" />
@@ -54,12 +55,12 @@ export default function Home() {
         <div className="scallop scallop--ivory" aria-hidden="true" />
       </section>
 
-      {/* 2. FIVE RASAS — ivory section */}
+      {/* 2. KL SAC creative clubs — ivory section */}
       <section className="section section--ivory">
         <div className="container">
           <Reveal className="heading heading--center">
-            <p className="eyebrow">Five art forms · one festival</p>
-            <h2 className="section-title">The five rasas of Surabhi</h2>
+            <p className="eyebrow">KL SAC · ten creative clubs</p>
+            <h2 className="section-title">Every art finds its stage</h2>
             <Ornament />
           </Reveal>
           <Reveal dir="zoom">

@@ -6,16 +6,16 @@ import type { IntroScene as IntroSceneType } from '../intro/IntroScene';
    paisleys swirl and lock → wordmark → camera pushes through.
    Falls back to a simple fade if WebGL is unavailable. */
 
-const WORDS = ['Music', 'Dance', 'Art', 'Drama', 'Fashion'];
-const WORD_START = 0.45;
-const WORD_STEP = 0.5;
+const WORDS = ['Music', 'Dance', 'Gaming', 'Art', 'Fashion', 'Film'];
+const WORD_START = 0.4;
+const WORD_STEP = 0.42;
 
 export default function Loader({ onDone }: { onDone: () => void }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wordRef = useRef<HTMLDivElement>(null);
   const flashRef = useRef<HTMLDivElement>(null);
-  const skipRef = useRef(false);
+  const skipRef = useRef<() => void>(() => {});
   const [fallback, setFallback] = useState(false);
 
   useEffect(() => {
@@ -31,6 +31,12 @@ export default function Loader({ onDone }: { onDone: () => void }) {
       finished = true;
       document.body.style.overflow = '';
       onDone();
+    };
+    // a tap or key press goes straight to the home page
+    skipRef.current = () => {
+      disposed = true;
+      cancelAnimationFrame(raf);
+      finish();
     };
 
     const run = async () => {
@@ -55,15 +61,10 @@ export default function Loader({ onDone }: { onDone: () => void }) {
       const freeze = import.meta.env.DEV || new URLSearchParams(location.search).has('introT') ? Number(new URLSearchParams(location.search).get('introT') ?? NaN) : NaN;
       const start = performance.now();
       let wordIdx = -1;
-      let skipFrom = -1;
 
       const frame = (now: number) => {
         const elapsed = Math.max(0, (now - start) / 1000);
         let t = reduced ? T.exit - 0.6 + Math.min(elapsed, 1.4) : elapsed;
-        if (skipRef.current) {
-          if (skipFrom < 0) skipFrom = elapsed;
-          t = Math.max(t, T.exit + (elapsed - skipFrom));
-        }
 
         if (!Number.isNaN(freeze)) t = freeze;
         scene?.update(t);
@@ -100,7 +101,7 @@ export default function Loader({ onDone }: { onDone: () => void }) {
       raf = requestAnimationFrame(frame);
     };
     run();
-    const onKey = () => (skipRef.current = true);
+    const onKey = () => skipRef.current();
     window.addEventListener('keydown', onKey);
 
     return () => {
@@ -113,7 +114,7 @@ export default function Loader({ onDone }: { onDone: () => void }) {
   }, [onDone]);
 
   return (
-    <div className={`intro3d ${fallback ? 'intro3d--fallback' : ''}`} ref={rootRef} data-phase="tiles" role="button" tabIndex={0} aria-label="Surabhi 2027 intro. Tap or press any key to enter" onPointerDown={() => (skipRef.current = true)}>
+    <div className={`intro3d ${fallback ? 'intro3d--fallback' : ''}`} ref={rootRef} data-phase="tiles" role="button" tabIndex={0} aria-label="Surabhi 2027 intro. Tap or press any key to enter" onPointerDown={() => skipRef.current()}>
       <div className="intro3d__bg" />
       <div className="intro3d__rays" />
       <canvas ref={canvasRef} className="intro3d__canvas" />
